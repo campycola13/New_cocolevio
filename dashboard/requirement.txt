@@ -1,0 +1,7 @@
+pandas
+numpy
+flask 
+datetime
+flask-cors
+sqlalchemy
+psycopg2-binary

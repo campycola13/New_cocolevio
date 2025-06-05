@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
 import { Search, Filter, ChevronDown, ChevronLeft, ChevronRight, MoreVertical } from "lucide-react";
 
 export default function PriorityTask() {
@@ -9,30 +11,21 @@ export default function PriorityTask() {
   const [rowsPerPage] = useState(10);
   const [sortField, setSortField] = useState("");
   const [sortDirection, setSortDirection] = useState("asc");
-
-  const allTasks = [
-    { id: 1, task: "Design UI Components", assignedTo: "John Doe", progress: 75, delay: 2, status: "In Progress", priority: "High" },
-    { id: 2, task: "Backend Integration", assignedTo: "Jane Smith", progress: 45, delay: 5, status: "In Progress", priority: "Critical" },
-    { id: 3, task: "Testing & QA", assignedTo: "Mike Johnson", progress: 20, delay: 1, status: "In Progress", priority: "Medium" },
-    { id: 4, task: "Database Optimization", assignedTo: "Sarah Wilson", progress: 90, delay: 0, status: "Nearly Complete", priority: "High" },
-    { id: 5, task: "User Authentication", assignedTo: "John Doe", progress: 100, delay: 0, status: "Complete", priority: "Critical" },
-    { id: 6, task: "API Documentation", assignedTo: "Alex Chen", progress: 60, delay: 3, status: "In Progress", priority: "Low" },
-    { id: 7, task: "Mobile Responsive Design", assignedTo: "Emma Davis", progress: 30, delay: 4, status: "In Progress", priority: "Medium" },
-    { id: 8, task: "Payment Gateway Integration", assignedTo: "Jane Smith", progress: 85, delay: 1, status: "Nearly Complete", priority: "Critical" },
-    { id: 9, task: "Error Logging System", assignedTo: "Mike Johnson", progress: 10, delay: 7, status: "Not Started", priority: "Low" },
-    { id: 10, task: "Performance Monitoring", assignedTo: "Sarah Wilson", progress: 50, delay: 2, status: "In Progress", priority: "Medium" },
-    { id: 11, task: "Security Audit", assignedTo: "Alex Chen", progress: 0, delay: 10, status: "Not Started", priority: "High" },
-    { id: 12, task: "Code Review Process", assignedTo: "Emma Davis", progress: 100, delay: 0, status: "Complete", priority: "Medium" },
-    { id: 13, task: "Email Notification System", assignedTo: "John Doe", progress: 65, delay: 1, status: "In Progress", priority: "Low" },
-    { id: 14, task: "Data Migration", assignedTo: "Sarah Wilson", progress: 80, delay: 2, status: "Nearly Complete", priority: "High" },
-    { id: 15, task: "Load Testing", assignedTo: "Mike Johnson", progress: 35, delay: 3, status: "In Progress", priority: "Medium" },
-    { id: 16, task: "User Dashboard", assignedTo: "Emma Davis", progress: 70, delay: 1, status: "In Progress", priority: "High" },
-    { id: 17, task: "Third-party API Integration", assignedTo: "Alex Chen", progress: 25, delay: 6, status: "In Progress", priority: "Critical" },
-    { id: 18, task: "Backup System", assignedTo: "Jane Smith", progress: 95, delay: 0, status: "Nearly Complete", priority: "Medium" },
-    { id: 19, task: "User Onboarding Flow", assignedTo: "John Doe", progress: 40, delay: 4, status: "In Progress", priority: "High" },
-    { id: 20, task: "Analytics Implementation", assignedTo: "Sarah Wilson", progress: 15, delay: 8, status: "Not Started", priority: "Low" }
-  ];
-
+  const [allTasks, setAllTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+  fetch("http://127.0.0.1:5000/api/tasks")
+    .then((res) => res.json())
+    .then((data) => {
+       console.log("Received tasks:", data); 
+      setAllTasks(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching tasks:", err);
+      setLoading(false);
+    });
+}, []);
   const uniqueAssignees = [...new Set(allTasks.map(task => task.assignedTo))];
   const uniqueStatuses = [...new Set(allTasks.map(task => task.status))];
 
@@ -90,10 +83,8 @@ export default function PriorityTask() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Complete": return "text-green-800 bg-green-100";
-      case "Nearly Complete": return "text-blue-800 bg-blue-100";
-      case "In Progress": return "text-yellow-800 bg-yellow-100";
-      case "Not Started": return "text-gray-800 bg-gray-100";
+      case "To Do": return "text-gray-800 bg-gray-200";
+      case "In Progress": return "text-violet-800 bg-violet-100";
       default: return "text-gray-800 bg-gray-100";
     }
   };
@@ -162,6 +153,15 @@ export default function PriorityTask() {
                 onClick={() => handleSort('task')}
               >
                 <div className="flex items-center gap-2">
+                  id
+                  <SortIcon field="task" />
+                </div>
+              </th>
+              <th 
+                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                onClick={() => handleSort('task')}
+              >
+                <div className="flex items-center gap-2">
                   Task
                   <SortIcon field="task" />
                 </div>
@@ -173,15 +173,6 @@ export default function PriorityTask() {
                 <div className="flex items-center gap-2">
                   Assigned To
                   <SortIcon field="assignedTo" />
-                </div>
-              </th>
-              <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                onClick={() => handleSort('progress')}
-              >
-                <div className="flex items-center gap-2">
-                  Progress
-                  <SortIcon field="progress" />
                 </div>
               </th>
               <th 
@@ -202,36 +193,19 @@ export default function PriorityTask() {
                   <SortIcon field="priority" />
                 </div>
               </th>
-              <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                onClick={() => handleSort('delay')}
-              >
-                <div className="flex items-center gap-2">
-                  Delay (Days)
-                  <SortIcon field="delay" />
-                </div>
-              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {paginatedTasks.map((task, index) => (
               <tr key={task.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-xl font-medium text-gray-900">{task.id}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xl font-medium text-gray-900">{task.task}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-xl text-gray-900">{task.assignedTo}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div className="w-16 bg-gray-200 rounded-full h-2 mr-3">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full" 
-                        style={{ width: `${task.progress}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-xl text-gray-900">{task.progress}%</span>
-                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`inline-flex px-2 py-1 rounded-full text-xl font-medium ${getStatusColor(task.status)}`}>
@@ -242,9 +216,6 @@ export default function PriorityTask() {
                   <span className={`inline-flex px-2 py-1 rounded-full text-xl font-medium ${getPriorityColor(task.priority)}`}>
                     {task.priority}
                   </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-xl text-gray-900">
-                  {task.delay}
                 </td>
               </tr>
             ))}
