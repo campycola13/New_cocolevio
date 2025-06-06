@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   FiMenu,
   FiHome,
@@ -7,6 +8,8 @@ import {
   FiPieChart,
   FiChevronLeft
 } from "react-icons/fi";
+
+
 
 const navItems = [
   { icon: FiHome, label: "Dashboard", id: "dashboard" },
@@ -27,8 +30,35 @@ function Sidebar({ isExpanded, setIsExpanded, isMobile }) {
     if (isMobile) {
       setIsExpanded(false);
     }
+    if (id === "dashboard") {
+      handleDashboardClick();
+    }
+    if (id === "settings") {
+      handleSettingsClick();
+    }
+    if (id === "analytics") {
+      handleAnalyticsClick();
+    }
   };
 
+  const handleDashboardClick = () => {
+    // Add your dashboard-specific logic here
+    navigate('/'); // Example: navigate to dashboard route
+  };
+
+  const handleSettingsClick = () => {
+    // Add your dashboard-specific logic here
+    navigate('/settings'); // Example: navigate to dashboard route
+  };
+
+  const handleAnalyticsClick = () => {
+    // Add your dashboard-specific logic here
+    navigate('/analytics'); // Example: navigate to dashboard route
+  };
+
+
+
+  const navigate = useNavigate();
   return (
     <>
       {/* Mobile Overlay */}
@@ -92,5 +122,6 @@ function Sidebar({ isExpanded, setIsExpanded, isMobile }) {
       </div>
     </>
   );
-}
+};
+
 export default Sidebar;

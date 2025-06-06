@@ -5,7 +5,6 @@ import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import Card from '../components/Card'
 import Cardtwo from '../components/Cardtwo'
-import Cardthree from '../components/Cardthree'
 import Prioritytask from '../components/Prioritytask'
 
 
@@ -47,12 +46,9 @@ function Home() {
           </div>
           
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
             <Card />
             <Cardtwo />
-            <div className="md:col-span-2 xl:col-span-1">
-              <Cardthree />
-            </div>
           </div>
           
           {/* Priority Tasks Section */}

@@ -14,10 +14,12 @@ CORS(app, supports_credentials=True, origins=[
     "http://localhost:3000"
 ])
 
-engine = create_engine('postgresql://postgres:root@localhost:5432/cocolevio')
-query = 'SELECT * FROM "Cocoleviodata"'
-df = pd.read_sql(query, engine)
-df['Original estimate'].dropna()
+df1=pd.read_csv('C:\\Users\\uansh\\Downloads\\FINAL_DATA_JIRA_Processed.csv')
+df = df1[['Issue key', 'Issue id', 'Issue Type', 'Project name', 'Project lead',
+          'Priority', 'Assignee', 'Reporter', 'Due date', 'Description',
+          'Original estimate', 'Time Spent', 'Status Category', 'Created',
+          'inward_problem', 'outward_problem']].dropna()
+
 
 
 @app.route('/')
@@ -78,7 +80,8 @@ def get_tasks():
         'Status Category': 'status',
         'Priority': 'priority'
     } )
-
+   
+    
     return jsonify(df_sorted.drop(['outward_problem', 'priority_num'], axis=1).to_dict(orient='records'))
 
 @app.route('/api/projects', methods=['GET'])

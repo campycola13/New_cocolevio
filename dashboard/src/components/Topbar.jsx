@@ -1,7 +1,15 @@
 import React from "react";
 import { FiBell, FiMenu} from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 
 export default function Topbar({ onToggleSidebar = () => {}, isMobile = false, isSidebarOpen = false }) {
+
+  const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate('/profile'); 
+    };
+
   return (
     <div className="w-full bg-white">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 gap-4">
@@ -27,7 +35,7 @@ export default function Topbar({ onToggleSidebar = () => {}, isMobile = false, i
         {/* User Profile Section */}
         <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end order-1 sm:order-2">
           <FiBell className="h-6 w-6 md:h-8 md:w-8 text-black cursor-pointer hover:text-gray-600 flex-shrink-0" />
-          <div className="flex flex-row items-center gap-3 min-w-0">
+          <div className="flex flex-row items-center cursor-pointer gap-3 min-w-0" onClick={handleRedirect}>
             <img 
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" 
               alt="Profile" 

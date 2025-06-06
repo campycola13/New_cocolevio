@@ -5,3 +5,4 @@ datetime
 flask-cors
 sqlalchemy
 psycopg2-binary
+recharts

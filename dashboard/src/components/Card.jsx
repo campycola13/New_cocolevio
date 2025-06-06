@@ -14,9 +14,7 @@ export default function Card() {
         setError(null);
 
         const response = await fetch('http://127.0.0.1:5000/progress');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        
 
         const data = await response.json();
         console.log('Fetched data:', data);
@@ -45,10 +43,10 @@ export default function Card() {
   }
 
   return (
-    <div className="bg-white rounded-2xl md:rounded-3xl md:h-90 p-4 md:p-6 shadow-sm">
+    <div className="bg-white rounded-2xl md:rounded-3xl h-120 md:h-160 p-4 md:p-6 shadow-sm">
       <h3 className="text-lg md:text-3xl font-semibold mb-4 md:mb-6 text-gray-800">Project Progress</h3>
       <div className="flex flex-col sm:flex-row items-center justify-between lg:mr-12 gap-4">
-        <div className="flex flex-col space-y-3 md:space-y-9 order-2 md:mt-12 sm:order-1">
+        <div className="flex flex-col space-y-3 md:space-y-9 order-2 md:mt-24 sm:order-1">
           <div className="flex items-center space-x-3">
             <span className="h-3 w-3 md:h-4 md:w-4 bg-[#3A30FF] rounded"></span>
             <p className="text-sm md:text-xl font-medium text-gray-700">
@@ -64,7 +62,7 @@ export default function Card() {
         </div>
 
         <PieChart
-          className="md:mt-4"
+          className="md:mt-16"
           series={[
             {
               data: [
@@ -73,8 +71,8 @@ export default function Card() {
               ],
             },
           ]}
-          width={200}
-          height={200}
+          width={360}
+          height={360}
         />
       </div>
     </div>

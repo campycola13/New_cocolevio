@@ -16,7 +16,7 @@ const Profile = () => {
   const [newNote, setNewNote] = useState("");
   
   // Sidebar state management
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if screen is mobile
