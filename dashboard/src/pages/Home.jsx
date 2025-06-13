@@ -33,7 +33,7 @@ function Home() {
       
       {/* Main Content */}
       <div className={`flex-1 transition-all duration-300 ${
-        !isMobile && isExpanded ? 'ml-80' : !isMobile && !isExpanded ? 'ml-16' : 'ml-0'
+        isExpanded ? 'ml-48' : 'ml-16'
       }`}>
         <Topbar />
         
@@ -41,8 +41,8 @@ function Home() {
         <div className="p-4 md:p-6 lg:p-8">
           {/* Dashboard Header */}
           <div className="mb-6 md:mb-8">
-            <h1 className="text-2xl md:text-5xl lg:text-5xl font-bold mb-2 text-gray-900">Dashboard</h1>
-            <p className="text-base md:text-2xl lg:text-xl text-gray-600 font-medium">Welcome Back, David</p>
+            <h1 className="text-xl md:text-3xl font-bold mb-2 text-gray-900">Dashboard</h1>
+            <p className="text-base md:text-xl text-gray-600 font-medium">Welcome Back, David</p>
           </div>
           
           {/* Cards Grid */}
@@ -53,7 +53,7 @@ function Home() {
           
           {/* Priority Tasks Section */}
           <div className="space-y-4 md:space-y-6">
-            <h2 className="text-xl md:text-3xl lg:text-4xl font-semibold text-gray-900">Priority Tasks</h2>
+            <h2 className="text-lg md:text-2xl font-semibold text-gray-900">Priority Tasks</h2>
             <Prioritytask />
           </div>
         </div>

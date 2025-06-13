@@ -48,12 +48,12 @@ const data = [
 export default function TaskStatusLineChart() {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm">
-      <h3 className="text-lg md:text-3xl font-semibold mb-6 text-gray-800">
+      <h3 className="text-base md:text-xl font-semibold mb-6 text-gray-800">
         Weekly task status
       </h3>
       
-      <div className="h-90 lg:h-120 w-full">
-        <ResponsiveContainer width="100%" height="100%" className="mt-16">
+      <div className="h-80 lg:h-90 w-full">
+        <ResponsiveContainer width="100%" height="100%" className="mt-8">
           <LineChart
             data={data}
             margin={{

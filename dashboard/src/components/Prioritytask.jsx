@@ -103,7 +103,7 @@ export default function PriorityTask() {
       {/* Toolbar */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          <h2 className="text-2xl font-medium text-gray-900">Tasks</h2>
+          <h2 className="text-lg font-medium text-gray-900">Tasks</h2>
           <div className="flex items-center gap-3">
             {/* Search */}
             <div className="relative">
@@ -121,7 +121,7 @@ export default function PriorityTask() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 text-xl border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              className="px-3 py-2 text-lg border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             >
               <option value="all">All Status</option>
               {uniqueStatuses.map(status => (
@@ -132,7 +132,7 @@ export default function PriorityTask() {
             <select
               value={assigneeFilter}
               onChange={(e) => setAssigneeFilter(e.target.value)}
-              className="px-3 py-2 text-xl border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              className="px-3 py-2 text-lg border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
             >
               <option value="all">All Assignees</option>
               {uniqueAssignees.map(assignee => (
@@ -149,7 +149,7 @@ export default function PriorityTask() {
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
               <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('task')}
               >
                 <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ export default function PriorityTask() {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('task')}
               >
                 <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export default function PriorityTask() {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('assignedTo')}
               >
                 <div className="flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function PriorityTask() {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('status')}
               >
                 <div className="flex items-center gap-2">
@@ -185,7 +185,7 @@ export default function PriorityTask() {
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xl font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-base font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('priority')}
               >
                 <div className="flex items-center gap-2">
@@ -199,21 +199,21 @@ export default function PriorityTask() {
             {paginatedTasks.map((task, index) => (
               <tr key={task.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xl font-medium text-gray-900">{task.id}</div>
+                  <div className="text-base font-medium text-gray-900">{task.id}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xl font-medium text-gray-900">{task.task}</div>
+                  <div className="text-base font-medium text-gray-900">{task.task}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-xl text-gray-900">{task.assignedTo}</div>
+                  <div className="text-base text-gray-900">{task.assignedTo}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`inline-flex px-2 py-1 rounded-full text-xl font-medium ${getStatusColor(task.status)}`}>
+                  <span className={`inline-flex px-2 py-1 rounded-full text-base font-medium ${getStatusColor(task.status)}`}>
                     {task.status}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`inline-flex px-2 py-1 rounded-full text-xl font-medium ${getPriorityColor(task.priority)}`}>
+                  <span className={`inline-flex px-2 py-1 rounded-full text-base font-medium ${getPriorityColor(task.priority)}`}>
                     {task.priority}
                   </span>
                 </td>
