@@ -1,52 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-  {
-    Done: 85,
-    'To Do': 95,
-    'In Progress': 75
-  },
-  {
-    week: 'May 25',
-    Done: 105,
-    'To Do': 100,
-    'In Progress': 82
-  },
-  {
-    week: 'Jun 1',
-    Done: 110,
-    'To Do': 102,
-    'In Progress': 88
-  },
-  {
-    week: 'Jun 8',
-    Done: 115,
-    'To Do': 108,
-    'In Progress': 78
-  },
-  {
-    week: 'Jun 15',
-    Done: 120,
-    'To Do': 112,
-    'In Progress': 80
-  },
-  {
-    week: 'Jun 22',
-    Done: 95,
-    'To Do': 100,
-    'In Progress': 72
-  },
-  {
-    week: 'Jun 29',
-    Done: 18,
-    'To Do': 15,
-    'In Progress': 12
-  }
-];
+  
 
 export default function TaskStatusLineChart() {
+
+   const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    fetch('http://localhost:5000/weekly-status')
+      .then((res) => res.json())
+      .then((json) => {
+        
+        const chartData = json.map((item, index) => ({
+          week: item.week || (index === 0 ? 'Total' : ''),
+          Done: item['Done'] || 0,
+          'To Do': item['To Do'] || 0,
+          'In Progress': item['In Progress'] || 0,
+        }));
+        console.log(chartData);
+        setData(chartData);
+      });
+  }, [])
+
+
+
+
   return (
+
+
     <div className="bg-white rounded-2xl p-6 shadow-sm">
       <h3 className="text-base md:text-xl font-semibold mb-6 text-gray-800">
         Weekly task status

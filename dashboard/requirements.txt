@@ -1,0 +1,7 @@
+pandas
+numpy
+flask
+flask-cors
+sqlalchemy
+psycopg2-binary
+sklearn
