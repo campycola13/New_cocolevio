@@ -1,3 +1,4 @@
+<img width="1533" height="885" alt="Screenshot 2025-06-04 191802" src="https://github.com/user-attachments/assets/bcb38e76-8f55-4fa6-8331-b31029c856f3" />
  🧠 Risky Ticket Detection Dashboard
 
 A role-based, machine learning-powered project risk detection dashboard developed during a professional engagement with **Cocolevio LLC**. This solution identifies and visualizes potentially risky or delayed tasks with high accuracy, aiding in project health monitoring and decision-making.
